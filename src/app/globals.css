@@ -1,0 +1,194 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --primary: #0e7a5f;
+  --primary-foreground: #f2faf8;
+  --accent: #e8893c;
+  --accent-foreground: #241a04;
+  --background: #f6faf8;
+  --foreground: #0c2b27;
+  --card: #ffffff;
+  --card-foreground: #0c2b27;
+  --popover: #ffffff;
+  --popover-foreground: #0c2b27;
+  --secondary: #e2efec;
+  --secondary-foreground: #0d3b34;
+  --muted: #edf5f3;
+  --muted-foreground: #57706b;
+  --destructive: #c2410c;
+  --destructive-foreground: #ffffff;
+  --border: rgba(14, 122, 95, 0.14);
+  --input: rgba(14, 122, 95, 0.22);
+  --ring: #0e7a5f;
+  --radius: 0.9rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-sora);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --color-sidebar-ring: var(--ring);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-accent-foreground: var(--accent-foreground);
+  --color-sidebar-accent: var(--accent);
+  --color-sidebar-primary-foreground: var(--primary-foreground);
+  --color-sidebar-primary: var(--primary);
+  --color-sidebar-foreground: var(--foreground);
+  --color-sidebar: var(--background);
+  --color-chart-5: #e8893c;
+  --color-chart-4: #b8860b;
+  --color-chart-3: #157a5f;
+  --color-chart-2: #1d9a7c;
+  --color-chart-1: #0e7a5f;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  h1, h2, h3, h4 {
+    @apply font-heading;
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: rgba(232, 137, 60, 0.35);
+  }
+}
+
+@layer components {
+  .glass {
+    @apply border border-white/60 bg-white/65 backdrop-blur-xl;
+    box-shadow: 0 8px 32px rgba(14, 122, 95, 0.08);
+  }
+  .glass-deep {
+    @apply border border-white/50 bg-white/70 backdrop-blur-2xl;
+    box-shadow: 0 12px 40px rgba(14, 122, 95, 0.1);
+  }
+  .glass-card {
+    @apply rounded-2xl border border-white/60 bg-white/65 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-primary/20;
+    box-shadow: 0 8px 32px rgba(14, 122, 95, 0.08);
+  }
+  .glass-card:hover {
+    box-shadow: 0 18px 48px rgba(14, 122, 95, 0.16);
+    border-color: rgba(14, 122, 95, 0.25);
+  }
+  .btn-primary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-[#0f9a77] px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+  .btn-ghost {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-primary/25 bg-white/60 px-7 py-3 text-sm font-semibold text-primary backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-white/85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-[#0f9a77] to-primary bg-clip-text text-transparent;
+  }
+  .icon-badge {
+    @apply inline-flex size-11 items-center justify-center rounded-xl border border-primary/15 bg-primary/10 text-primary;
+  }
+  .icon-badge-accent {
+    @apply inline-flex size-11 items-center justify-center rounded-xl border border-accent/25 bg-accent/15 text-[#96601c];
+  }
+}
+
+/* ---- Embla carousel ---- */
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  padding: 0.5rem;
+}
+@media (min-width: 768px) {
+  .embla__slide {
+    flex-basis: 50%;
+  }
+}
+@media (min-width: 1024px) {
+  .embla__slide {
+    flex-basis: 33.3333%;
+  }
+}
+.embla__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+.embla__dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 9999px;
+  background: rgba(14, 122, 95, 0.2);
+  transition: all 0.3s;
+}
+.embla__dot--selected {
+  width: 26px;
+  background: var(--primary);
+}
+
+/* ---- Background gradient blobs ---- */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+}
+.blob-primary {
+  background: rgba(14, 122, 95, 0.22);
+}
+.blob-accent {
+  background: rgba(232, 137, 60, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
